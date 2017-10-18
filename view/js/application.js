@@ -69,20 +69,22 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 	}
 
 	$scope.submitClick = function() {
-		if (input.value == 0) {
+		let userInput = Math.round(input.value);
+
+		if (userInput == 0) {
 			$scope.showToast('No results to display :)');
 			if ($scope.responses.length > 0) {
 				// somathing ij thare
 				$scope.responses = [];
 			}
-		} else if (input.value == "") {
+		} else if (userInput == "") {
 			$scope.showToast('Enter something ! Please ?', 3000);
-		} else if (isNaN(input.value)) {
+		} else if (isNaN(userInput)) {
 			$scope.showToast('You did not enter a number', 3000);
 		} else {
 			$scope.showToast('Querying results .. please wait', 1000);
 
-				$http.get(getWordsUrl + input.value)
+				$http.get(getWordsUrl + userInput + '/' + $scope.settings[0].enabled)
 					.success(function(data, status, header, config) {
 						if (typeof(data) == "string") {
 							$scope.showToast(data.replace('"', ""), 4000);

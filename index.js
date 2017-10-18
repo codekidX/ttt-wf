@@ -14,7 +14,7 @@ app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname + '/view/index.html'));
 })
 
-app.get('/api/nnumber/:number', nnumber);
+app.get('/api/nnumber/:number/:sort', nnumber);
 
 app.listen(5000);
 console.log("Started express server !");

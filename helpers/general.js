@@ -18,7 +18,7 @@ async function requestTxt() {
 	});
 }
 
-function operateTxt(para, howManyResults) {
+function operateTxt(para, howManyResults, inbuiltSort) {
 	 let trimmedPara = para.replace(/(?!\w|\s)./g, '')
 						    .replace(/\s+/g, ' ')
 						    .replace(/^(\s*)([\W\w]*)(\b\s*$)/g, '$2');
@@ -46,9 +46,13 @@ function operateTxt(para, howManyResults) {
 		if (howManyResults > wordsArrayWithCount.length) {
 			return "Error: number of words requested is exceeding number of words queried";
 		} else {
-			wordsArrayWithCount.sort(function(a, b) {
-				return b.count - a.count;
-			});
+			if (inbuiltSort) {
+				wordsArrayWithCount.sort(function(a, b) {
+					return b.count - a.count;
+				});
+			} else {
+					wordsArrayWithCount = _quicksort(wordsArrayWithCount);
+			}
 
 			let count = 0;
 			let finalArray = [];
@@ -59,6 +63,31 @@ function operateTxt(para, howManyResults) {
 
 			return finalArray;
 		}
+}
+
+/*
+* @param - wordsArrayWithCount
+*/
+var _quicksort = function(array) {
+	if (array.length <= 1) return array;
+	// do the sort - PART 1 - Divide
+	var marker = Math.floor((array.length - 1) / 2);
+	// marker word object to be swapped, greater than marker and less than the
+	// marker arrays
+	var markerWord = array[marker], gt=[], lt=[];
+	// remove marker from original
+	array = array.slice(0, marker).concat(array.slice(marker + 1));
+
+	for (var word in array) {
+		if (word.count > markerWord.count) {
+			gt.push(word);
+		} else {
+			lt.push(word);
+		}
+	}
+	// sort the lt[], gt[] same way and concat
+	// in descending order because top N
+	return (_quicksort(gt)).concat([markerWord], _quicksort(lt));
 }
 
 module.exports = {
