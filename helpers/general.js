@@ -43,18 +43,22 @@ function operateTxt(para, howManyResults) {
 		}
 	});
 
-	wordsArrayWithCount.sort(function(a, b) {
-		return b.count - a.count;
-	});
+		if (howManyResults > wordsArrayWithCount.length) {
+			return "Error: number of words requested is exceeding number of words queried";
+		} else {
+			wordsArrayWithCount.sort(function(a, b) {
+				return b.count - a.count;
+			});
 
-	let count = 0;
-	let finalArray = [];
+			let count = 0;
+			let finalArray = [];
 
-	for (var i = 0; i < howManyResults; i++) {
-		finalArray.push(wordsArrayWithCount[i]);
-	}
+			for (var i = 0; i < howManyResults; i++) {
+				finalArray.push(wordsArrayWithCount[i]);
+			}
 
-	return finalArray;
+			return finalArray;
+		}
 }
 
 module.exports = {

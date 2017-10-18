@@ -1,45 +1,88 @@
-<!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-	<title></title>
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-	<style type="text/css">
-		#inputN {
-			background-color: rgba(209, 209, 209, 0.12);
-			border: none;
-			border-radius: 4px;
-			height: 40px;
-			width: 400px;
-			color: white;
-		}
-
-		#inputN:focus {
-			outline: none;
-		}
-
-		input[placeholder]{
-			color: rgba(229, 229, 229, 0.32);
-			text-align: center;
-			font-size: 1.7em;
-		}
-
-		body {
-
-		}
-
-	</style>
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+      <link rel="stylesheet" href="css/style.css">
+    <meta name="theme-color" content="#242A2E">
 </head>
-<body ng-app="ttt" style="background: #1c1c1c">
+<body ng-app="ttt" ng-cloak>
+  <!--
+    Your HTML content here
+  -->
+    <div ng-controller="defaultCtrl" layout="column" style="height:100%" ng-cloak>
 
-<section>
-<div ng-controller="defaultCtrl" layout="row" layout-align="center center">
-	<input id="inputN" type="text" name="" placeholder="Enter a number">
-	<md-button class="md-primary md-raised" ng-click="submitClick()">Submit</md-button>
+  <section layout="row" flex>
+
+    <md-sidenav
+        class="md-sidenav-left"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-whiteframe="4">
+
+      <md-toolbar class="ck-toolbar">
+        <h1 style="font-weight: bold;" class="md-toolbar-tools ck-htwos">Options</h1>
+      </md-toolbar>
+      <md-content>
+				<md-subheader class="md-no-sticky">Sorting</md-subheader>
+				  <md-list-item ng-repeat="setting in settings">
+				    <p> {{ setting.name }} </p>
+				    <md-checkbox class="md-secondary" ng-model="setting.enabled"></md-switch>
+				  </md-list-item>
+
+        <p class="title-date" ng-show="settings[0].enabled == false">The word frequency finder will now use custom implemented
+        QuickSort algorithm.</p>
+      </md-content>
+    </md-sidenav>
+
+    <md-content flex>
+
+      <div layout="column" layout-align="top">
+          <md-toolbar class="ck-toolbar">
+              <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+                  <md-icon ng-click="toggleLeft()" md-svg-icon="img/icons/menu.svg" hide-gt-md></md-icon>
+                </md-button>
+
+                <h2 style="font-weight: bold;" flex md-truncate class="ck-htwos">TTT-WF</h2>
+        <!--        <md-button class="md-primary md-raised" id="ck-button" show-gt-md>Resume</md-button>-->
+              </div>
+          </md-toolbar>
+
+					<md-card class="data-card">
+							<div layout-gt-sm="row">
+			          <md-input-container>
+			            <label>Number Of Results</label>
+			            <input id="inputN">
+			          </md-input-container>
+					</div>
+					<md-button id="ck-button" class="md-primary md-raised" ng-click="submitClick()">Submit</md-button>
+					</md-card>
+      </div>
+
+			<div layout="row" layout-align="center">
+				<md-card>
+					<table class="word-table" align="center">
+						<tr>
+							<td>Word</td>
+							<td>Count</td>
+						</tr>
+						<tr ng-repeat="response in responses">
+							<td>{{response.word}}</td>
+							<td>{{response.count}}</td>
+						</tr>
+					</table>
+				</md-card>
+			</div>
+
+      <div ui-view></div>
+
+    </md-content>
+
+  </section>
+
 </div>
-</section>
-
 
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -51,6 +94,6 @@
 
   <!-- Angular Material Library -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-  <script type="text/javascript" src="js/application.js"></script>
+  <script src="js/application.js"></script>
 </body>
 </html>

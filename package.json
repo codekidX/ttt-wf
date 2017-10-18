@@ -1,0 +1,30 @@
+{
+  "name": "ttt-wf",
+  "version": "1.0.0",
+  "description": "mean stack word freq checker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codekidX/ttt-wf.git"
+  },
+  "author": "Ashish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codekidX/ttt-wf/issues"
+  },
+  "homepage": "https://github.com/codekidX/ttt-wf#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1"
+  }
+}

@@ -1,0 +1,67 @@
+.md-toolbar-tools {
+    background-color: #0073CA;
+}
+
+.md-3-line {
+    background-color: #272e33;
+}
+
+.ck-htwos {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 20px;
+}
+
+#ck-button {
+    background-color: #0073CA;
+    width: 2em;
+}
+
+.title-headings {
+    font-family: 'Maven Pro', sans-serif;
+}
+
+.title-date {
+    font-family: 'Maven Pro', sans-serif;
+    color: #0073CA;
+    padding: 1em;
+}
+
+.profile-headings {
+    font-family: 'Maven Pro', sans-serif;
+    color: #ededed;
+}
+
+.search-container {
+    background-color: #3F4548;
+    border-radius: 3px;
+}
+
+/*Table style*/
+table {
+  border-radius: 0px;
+}
+tr {
+    padding: 3em;
+}
+td {
+    padding: 15px;
+}
+tr:hover {background-color: #f5f5f5}
+
+.data-card {
+  width: inherit;
+}
+
+.word-table {
+  padding: 15px;
+}
+
+
+
+
+html, body {
+    background-color: #FAFAFA;
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+}

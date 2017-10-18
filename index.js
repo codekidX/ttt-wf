@@ -3,11 +3,12 @@ const bodyParser = require("body-parser");
 const path = require("path");
 var app = express();
 //routes
-var nnumber = require("./routes/nnumber") 
+var nnumber = require("./routes/nnumber")
 
 // parse request body as json
 app.use(bodyParser.json());
 app.use(express.static("view"));
+app.use(express.static("node_modules"));
 
 app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname + '/view/index.html'));
