@@ -29,6 +29,7 @@
 .profile-headings {
     font-family: 'Maven Pro', sans-serif;
     color: #ededed;
+    margin-left: 1em;
 }
 
 .search-container {
@@ -50,6 +51,12 @@ tr:hover {background-color: #f5f5f5}
 
 .data-card {
   width: inherit;
+  padding: 2em;
+}
+
+.data-text {
+  font-family: 'Maven Pro', sans-serif;
+  color: #5e5e5e;
 }
 
 .word-table {

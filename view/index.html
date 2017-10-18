@@ -50,7 +50,14 @@
           </md-toolbar>
 
 					<md-card class="data-card">
-							<div layout-gt-sm="row">
+							<div>
+                <h1 class="title-headings"><a id="Word_Frequency_0"></a>Word Frequency</h1>
+                <ul class="data-text">
+                <li>Counts the frequency of words obtained from this link - <a href="http://terriblytinytales.com/test.txt">http://terriblytinytales.com/test.txt</a></li>
+                <li>The options on the left allows you to specify the sorting algorithm to sort the higher count words. This is due to mozilla using mergesort on arrays and Chrome v8 using insertionsort or quicksort for small arrays and mergesort for larger ones.</li>
+                <li>Here unchecking the option to implement quicksort will actually kinda sorts within the same range of time because of the amount of data.</li>
+                <li>You need to specify the top number of result that you need back from the sorted words.</li>
+                </ul>
 			          <md-input-container>
 			            <label>Number Of Results</label>
 			            <input id="inputN">
