@@ -4,6 +4,8 @@ const path = require("path");
 var app = express();
 //routes
 var nnumber = require("./routes/nnumber")
+// heroku port config
+var port = process.env.PORT || 8080;
 
 // parse request body as json
 app.use(bodyParser.json());
@@ -16,7 +18,8 @@ app.get("/", function(req, res) {
 
 app.get('/api/nnumber/:number/:sort', nnumber);
 
-app.listen(5000);
-console.log("Started express server !");
+app.listen(port, function () {
+	console.log("Started express server on port - " + port);
+});
 
 module.exports = app;
