@@ -10,7 +10,6 @@ var port = process.env.PORT || 8080;
 // parse request body as json
 app.use(bodyParser.json());
 app.use(express.static("view"));
-app.use(express.static("node_modules"));
 
 app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname + '/view/index.html'));
