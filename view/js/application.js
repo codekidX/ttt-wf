@@ -1,5 +1,5 @@
 var app = angular.module('ttt', ['ngMaterial']);
-const serverUrl = "http://localhost:5000";
+const serverUrl = "http://localhost:" + process.env.PORT;
 const getWordsUrl = serverUrl + "/api/nnumber/";
 
 app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSidenav, $log) {
