@@ -1,6 +1,7 @@
 const app = require('../index');
 var chai = require('chai');
 const chaiHttp = require('chai-http');
+let should = chai.should();
 
 // use module
 chai.use(chaiHttp);
@@ -12,7 +13,7 @@ describe('Integration Test', function () {
     chai.request(app)
         .get('/')
         .end(function (req, res) {
-          expect.res.to.have.status(200);
+          res.should.have.status(20);
         });
   });
 
@@ -20,18 +21,26 @@ describe('Integration Test', function () {
     chai.request('http://localhost:5000')
         .get('/')
         .end(function (err, res) {
-          expect.res.to.have.status(200);
+          expect.res.to.have.status(2);
+        });
+  });
+  it('should respond 401', function () {
+    chai.request('http://localhost:5000')
+        .get('/test')
+        .end(function (err, res) {
+          expect.res.to.have.status(40);
         });
   });
 });
 
 //api
 describe('API', function () {
-  it('should have param number', function () {
+  it('should have param number and sort', function () {
     chai.request(app)
-        .get('/api/nnumber/4')
+        .get('/api/nnumber')
         .end(function (req, res) {
-          expect.req.to.have.param('number');
+          req.body.should.have.property('_number');
+          req.body.should.have.property('_sort');
         });
   });
 
@@ -45,7 +54,7 @@ describe('API', function () {
 
   it('should not have param number as float', function () {
     chai.request(app)
-        .get('/api/nnumber/6')
+        .get('/api/nnumber/6.5')
         .end(function (req, res) {
           expect.req.not.to.have.param('number', 'float');
         });
