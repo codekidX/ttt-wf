@@ -1,5 +1,5 @@
 var app = angular.module('ttt', ['ngMaterial']);
-const serverUrl = "http://localhost:" + process.env.PORT;
+const serverUrl = "https://ttt-wf.herokuapp.com";
 const getWordsUrl = serverUrl + "/api/nnumber/";
 
 app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSidenav, $log) {
