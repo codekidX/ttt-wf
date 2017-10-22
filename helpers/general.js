@@ -1,5 +1,9 @@
 const request = require("request");
 
+/*
+* sends http request to obtain the body of the text file hosted on ttt Website
+* @returns - Promise with request function on execution [.then()]
+*/
 async function requestTxt() {
 	let requestOpt = {
 		uri: "http://terriblytinytales.com/test.txt",
@@ -18,6 +22,16 @@ async function requestTxt() {
 	});
 }
 
+/*
+* @params - para | String - body of the txt
+*					- howManyResults | Integer - number of results to return
+*					- inbuiltSort | Boolean - use inbuilt browser sort function or
+*						custom quicksort algorithm
+*  - replaces escape characters and capitalized strings to lower case
+*  - splits it into array of words
+*  - sorts them by descending order of their frequency
+*  @returns - Array of Word objects [:word, :count variables]
+*/
 function operateTxt(para, howManyResults, inbuiltSort) {
 	 let trimmedPara = para.replace(/(?!\w|\s)./g, '')
 						    .replace(/\s+/g, ' ')

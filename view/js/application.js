@@ -1,13 +1,17 @@
 var app = angular.module('ttt', ['ngMaterial']);
 const serverUrl = "https://ttt-wf.herokuapp.com";
-const getWordsUrl = serverUrl + "/api/nnumber/";
+const testServerUrl = "http://localhost:8080";
+const getWordsUrl = testServerUrl + "/api/nnumber/";
 
 app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSidenav, $log) {
 	var input = document.getElementById("inputN");
 
 	$scope.sortSwitch = false;
+	// scoped function to toggle nav drawer
 	$scope.toggleLeft = buildDelayedToggler('left');
+	// responses from backend server [word frequency and it's count]
 	$scope.responses;
+	// settings for sorting [ng-repeat action on this array]
 	$scope.settings = [
 		{
 			name: "Inbuilt",
@@ -15,10 +19,19 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 		}
 	]
 
+	/*
+	* show/hide instructions regarding sorting options
+	* @param - shouldHide | Boolean
+	*/
 	$scope.showHideInstruction = function (shouldHide) {
 			$scope.sortSwitch = shouldHide;
 	}
 
+	/*
+	* shows a material toast type dialog
+	* @params - message | String - message to display
+	*					- time | Integer - in milliseconds to exit
+	*/
 	$scope.showToast = function (message, time) {
 		$mdToast.show(
 				$mdToast.simple()
@@ -68,6 +81,10 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 		};
 	}
 
+	/*
+	* ng-click action - sends an http request to backend with the value of the
+	* 									input textarea and the sorting type
+	*/
 	$scope.submitClick = function() {
 		let userInput = Math.round(input.value);
 
@@ -87,11 +104,10 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 				$http.get(getWordsUrl + userInput + '/' + $scope.settings[0].enabled)
 					.success(function(data, status, header, config) {
 						if (typeof(data) == "string") {
-							$scope.showToast(data.replace('"', ""), 4000);
+							$scope.showToast(data, 4000);
 						} else {
 							$scope.responses = data;
 						}
-						console.log(data);
 					});
 		}
 	}
