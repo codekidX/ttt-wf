@@ -2,6 +2,7 @@ const app = require('../index');
 var chai = require('chai');
 const chaiHttp = require('chai-http');
 let should = chai.should();
+let expect = chai.expect;
 
 // use module
 chai.use(chaiHttp);
@@ -9,54 +10,52 @@ chai.use(chaiHttp);
 
 // Integration
 describe('Integration Test', function () {
-  it('should have respose code 200', function () {
+  it('should have respose code 200', function (done) {
     chai.request(app)
         .get('/')
         .end(function (req, res) {
-          res.should.have.status(20);
+          res.should.have.status(200);
+          done();
         });
   });
 
-  it('should also respond on accessing localhost silently', function () {
-    chai.request('http://localhost:5000')
+  it('should also respond on accessing localhost silently', function (done) {
+    chai.request('http://localhost:8080')
         .get('/')
         .end(function (err, res) {
-          expect.res.to.have.status(2);
+          res.should.have.status(200);
+          done();
         });
   });
-  it('should respond 401', function () {
-    chai.request('http://localhost:5000')
+  it('should respond 404 for unmapped routes', function (done) {
+    chai.request(app)
         .get('/test')
         .end(function (err, res) {
-          expect.res.to.have.status(40);
+          res.should.have.status(404);
+          done();
         });
   });
 });
 
 //api
 describe('API', function () {
-  it('should have param number and sort', function () {
-    chai.request(app)
-        .get('/api/nnumber')
-        .end(function (req, res) {
-          req.body.should.have.property('_number');
-          req.body.should.have.property('_sort');
-        });
-  });
 
-  it('should have param number which is an integer', function () {
+  it('nnumber api should have key word in it\'s response', function (done) {
     chai.request(app)
-        .get('/api/nnumber/4')
+        .get('/api/nnumber/4/true')
         .end(function (req, res) {
-          expect.req.to.have.param('number', 'integer');
+          expect(res.text).to.include('word');
+          done();
         })
   });
 
-  it('should not have param number as float', function () {
+  it('nnumber api should return empty array on 0 input', function (done) {
     chai.request(app)
-        .get('/api/nnumber/6.5')
+        .get('/api/nnumber/0/true')
         .end(function (req, res) {
-          expect.req.not.to.have.param('number', 'float');
+          console.log(res.length);
+          expect(res.text).to.equal('[]');
+          done();
         });
   });
 });
