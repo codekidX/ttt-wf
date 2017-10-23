@@ -20,6 +20,14 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 	]
 
 	/*
+	* custom keypress actions
+	*/
+	$scope.wfKeyEvent = function (keyEvent) {
+		if (keyEvent.which === 13) {
+			$scope.submitClick();
+		}
+	}
+	/*
 	* show/hide instructions regarding sorting options
 	* @param - shouldHide | Boolean
 	*/
@@ -86,6 +94,7 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 	* 									input textarea and the sorting type
 	*/
 	$scope.submitClick = function() {
+
 		let userInput = Math.round(input.value);
 
 		if (userInput <= 0) {

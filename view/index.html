@@ -60,7 +60,7 @@
                 </ul>
 			          <md-input-container>
 			            <label>Number Of Results</label>
-			            <input id="inputN">
+			            <input id="inputN" ng-keypress="wfKeyEvent($event)">
 			          </md-input-container>
 					</div>
 					<md-button id="ck-button" class="md-primary md-raised" ng-click="submitClick()">Submit</md-button>
