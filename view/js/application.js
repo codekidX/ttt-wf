@@ -88,7 +88,7 @@ app.controller('defaultCtrl', function($scope, $http, $mdToast, $timeout, $mdSid
 	$scope.submitClick = function() {
 		let userInput = Math.round(input.value);
 
-		if (userInput == 0) {
+		if (userInput <= 0) {
 			$scope.showToast('No results to display :)');
 			if ($scope.responses.length > 0) {
 				// somathing ij thare
