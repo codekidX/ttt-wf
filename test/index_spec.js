@@ -43,7 +43,7 @@ describe('API', function () {
   it('nnumber api should have key word in it\'s response', function (done) {
     chai.request(app)
         .get('/api/nnumber/4/true')
-        .end(function (req, res) {
+        .end(function (err, res) {
           expect(res.text).to.include('word');
           done();
         })
@@ -52,9 +52,28 @@ describe('API', function () {
   it('nnumber api should return empty array on 0 input', function (done) {
     chai.request(app)
         .get('/api/nnumber/0/true')
-        .end(function (req, res) {
-          console.log(res.length);
+        .end(function (err, res) {
           expect(res.text).to.equal('[]');
+          done();
+        });
+  });
+
+  it('nnumber api should return array', function (done) {
+    chai.request(app)
+        .get('/api/nnumber/2/true')
+        .end(function (err, res) {
+          let resJson = JSON.parse(res.text);
+          expect(resJson).to.be.an('array');
+          done();
+        });
+  });
+
+  it('nnumber api should return same length of array as user input', function (done) {
+    chai.request(app)
+        .get('/api/nnumber/2/true')
+        .end(function (err, res) {
+          let resJson = JSON.parse(res.text);
+          expect(resJson).to.have.lengthOf(2);
           done();
         });
   });
